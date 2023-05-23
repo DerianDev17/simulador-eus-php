@@ -10,7 +10,7 @@ include("funciones.php");
 
 
 //Se presióno el botón Nuevo Tema
-if(isset($_GET['nuevoTema'])){
+if (isset($_GET['nuevoTema'])) {
     //tomamos los datos que vienen del formulario
     $tema = $_GET['nombreTema'];
     $mensaje = agregarNuevoTema($tema);
@@ -18,23 +18,43 @@ if(isset($_GET['nuevoTema'])){
 }
 /******************************************************* */
 //GUARDAMOS LA PREGUNTA
-if (isset($_GET['guardar'])) {
+if (isset($_POST['guardar'])) {
     //nos conectamos a la base de datos
     include("conexion.php");
 
     //tomamos los datos que vienen del fosrmulario
     // elimina texto con formato de etiqueta html
-    $pregunta = htmlspecialchars($_GET['pregunta']);
-    $opcion_a = htmlspecialchars($_GET['opcion_a']);
-    $opcion_b = htmlspecialchars($_GET['opcion_b']);
-    $opcion_c = htmlspecialchars($_GET['opcion_c']);
-    $opcion_d = htmlspecialchars($_GET['opcion_d']);
-    $id_tema = $_GET['tema'];
-    $correcta = $_GET['correcta'];
+    $pregunta = htmlspecialchars($_POST['pregunta']);
+    $opcion_a = htmlspecialchars($_POST['opcion_a']);
+    $opcion_b = htmlspecialchars($_POST['opcion_b']);
+    $opcion_c = htmlspecialchars($_POST['opcion_c']);
+    $opcion_d = htmlspecialchars($_POST['opcion_d']);
+    $id_tema = $_POST['tema'];
+    $correcta = $_POST['correcta'];
+    // $imagena = $_POST['imagenalex'];
+
+    $imgFile = $_FILES['imagenalex']['name'];
+    $tmp_dir = $_FILES['imagenalex']['tmp_name'];
+    $imgSize = $_FILES['imagenalex']['size'];
+
+    $upload_dir = 'imagenes/';
+    $imgExt = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION));
+    $valid_extensions = array('jpeg', 'jpg', 'png', 'gif');
+    $userpic = rand(1000, 1000000) . "." . $imgExt;
+
+    if (in_array($imgExt, $valid_extensions)) {
+        if ($imgSize < 1000000) {
+            move_uploaded_file($tmp_dir, $upload_dir . $userpic);
+        } else {
+            $errMSG = "Su archivo es muy grande.";
+        }
+    } else {
+        $errMSG = "Solo archivos JPG, JPEG, PNG & GIF son permitidos.";
+    }
 
     //Armamos el query para insertar en la tabla preguntas
-    $query = "INSERT INTO preguntas (id, tema, pregunta, opcion_a, opcion_b, opcion_c, opcion_d, correcta)
-    VALUES (NULL, '$id_tema','$pregunta', '$opcion_a','$opcion_b','$opcion_c','$opcion_d','$correcta')";
+    $query = "INSERT INTO preguntas (id, tema, pregunta, opcion_a, opcion_b, opcion_c, opcion_d, correcta,imagenes)
+    VALUES (NULL, '$id_tema','$pregunta', '$opcion_a','$opcion_b','$opcion_c','$opcion_d','$correcta','$userpic')";
 
     //insertamos en la tabla preguntas
     if (mysqli_query($conn, $query)) { //Se insertó correctamente
@@ -51,6 +71,7 @@ $resltado_temas = obetenerTodosLosTemas();
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,6 +81,7 @@ $resltado_temas = obetenerTodosLosTemas();
     <link rel="stylesheet" href="estilo.css">
     <title>Quiz Game</title>
 </head>
+
 <body>
     <div class="contenedor">
         <header>
@@ -71,7 +93,8 @@ $resltado_temas = obetenerTodosLosTemas();
                 <h2>Complete la Pregunta</h2>
                 <hr>
                 <section id="nuevaPregunta">
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get">
+                    <!-- <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get"> -->
+                    <form method="post" enctype="multipart/form-data">
                         <div class="fila">
                             <label for="">Tema: </label>
                             <select name="tema" id="tema">
@@ -82,12 +105,15 @@ $resltado_temas = obetenerTodosLosTemas();
                                 <?php endwhile ?>
                             </select>
                             <span class="agregarTema" onclick="agregarTema()">
-                            <i class="fa-solid fa-circle-plus"></i></span>
+                                <i class="fa-solid fa-circle-plus"></i></span>
                         </div>
                         <div class="fila">
                             <label for="">Pregunta:</label>
                             <textarea name="pregunta" id="" cols="30" rows="10" required></textarea>
-                            <input  type="file" name="pregunta" id="" cols="30" rows="10" required >
+                        </div>
+                        <div class="fila">
+                            <label for="">Imagen:</label>
+                            <input type="file" name="imagenalex" id="" cols="30" rows="10" >
                         </div>
                         <div class="opciones">
                             <div class="opcion">
@@ -120,7 +146,7 @@ $resltado_temas = obetenerTodosLosTemas();
                         <input type="submit" value="Guardar Pregunta" name="guardar" class="btn-guardar">
                     </form>
 
-                    <?php if (isset($_GET['guardar'])) : ?>
+                    <?php if (isset($_POST['guardar'])) : ?>
                         <span> <?php echo $mensaje ?></span>
                     <?php endif ?>
                 </section>
@@ -137,13 +163,16 @@ $resltado_temas = obetenerTodosLosTemas();
             <span class="close" onclick="cerrarTema()">&times;</span>
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get">
                 <label for="">Agregar Nuevo Tema</label>
-                <input type="text"   name="nombreTema" required>
+                <input type="text" name="nombreTema" required>
                 <input type="submit" name="nuevoTema" value="Guardar Tema" class="btn">
             </form>
         </div>
     </div>
 
     <script src="script.js"></script>
-    <script>paginaActiva(1);</script>
+    <script>
+        paginaActiva(1);
+    </script>
 </body>
+
 </html>

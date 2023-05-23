@@ -16,12 +16,12 @@ $totalPreguntasPorJuego = $confi['totalPreguntas'];
 //Variables que contral la partida
 
 
-if(isset($_GET['siguiente'])){//Ya esta jugando
+if(isset($_POST['siguiente'])){//Ya esta jugando
     //Aumento 1 en las estadísticas
     aumentarRespondidas();
 
     //Controlar si la respuesta esta bien
-    if($_SESSION['respuesta_correcta']==$_GET['respuesta']){
+    if($_SESSION['respuesta_correcta']==$_POST['respuesta']){
         $_SESSION['correctas'] = $_SESSION['correctas'] + 1;
     }
 
@@ -80,7 +80,16 @@ if(isset($_GET['siguiente'])){//Ya esta jugando
             <h3>
                 <?php echo $preguntaActual['pregunta']?>
             </h3>
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get">
+            <!-- <h3> -->
+            <div class="img-box">
+                <!-- <?php echo $preguntaActual['pregunta']?> -->
+                <!-- <img src='data:imagen/jpg;charset=utf8;base64,<?php echo  base64_encode($preguntaActual['imagenes']); ?>' width="230" /> -->
+                <img src="admin/imagenes/<?php echo $preguntaActual['imagenes']; ?>" width="305px" height="116px" />
+      
+            </div>
+            <!-- </h3> -->
+            <!-- <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get"> -->
+            <form method="post" enctype="multipart/form-data">
                 <div class="opciones">
                     <label for="respuesta1" onclick="seleccionar(this)" class="op1">
                         <p><?php echo $preguntaActual['opcion_a']?></p>

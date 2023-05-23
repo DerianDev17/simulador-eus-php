@@ -7,7 +7,7 @@
 body {
     margin: 0;
     height: 100vh;
-    background: url(img/fondo.jpg);
+    background: url(img/fondoazulM.jpg);
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -26,7 +26,7 @@ body {
     display: flex;
     padding: 30px 0 60px 0;
     /* From https://css.glass */
-    background: rgba(76, 40, 166, 0.7);
+    background: rgba(239, 125, 0, 0.9);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
@@ -44,7 +44,7 @@ body {
     border-right: 3px solid rgba(255, 255, 255, 0.9);
 }
 
-.container .left .logo {
+/* .container .left .logo {
     width: 247px;
     height: 180px;
     background-repeat: no-repeat;
@@ -59,7 +59,7 @@ body {
     line-height: 46px;
     position: relative;
     animation: aparecer 1.5s forwards;
-}
+} */
 
 .container .left h2 {
     text-align: center;
@@ -91,7 +91,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 
 .container .right h3 {
@@ -118,7 +118,7 @@ body {
     display: block;
     text-decoration: none;
     text-align: center;
-    width: 100%;
+    width: 96%;
     color: #fff;
     border: none;
     background: transparent;
@@ -146,7 +146,7 @@ footer {
     position: absolute;
     width: 100%;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 1);
     text-align: center;
 }
 
@@ -174,7 +174,7 @@ footer a:hover {
     padding: 30px 20px 60px 10px;
     color: #fff;
     /* From https://css.glass */
-    background: rgba(76, 40, 166, 0.7);
+    background: rgba(239, 125, 0, 0.7);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
@@ -192,8 +192,8 @@ footer a:hover {
 }
 
 .container-juego header .categoria {
-    background: linear-gradient(to right, #8deb58, #cef35a);
-    color: #000;
+    background: linear-gradient(to right, #ef7d00, #000000);
+    color: #fff;
     padding: 3px 10px;
     display: inline-block;
 }
@@ -255,6 +255,10 @@ footer a:hover {
     animation: aparecerOp 1s forwards;
     animation-delay: 2s;
 }
+.container-juego .opciones .op4 {
+    animation: aparecerOp 1s forwards;
+    animation-delay: 2.5s;
+}
 
 @keyframes aparecerOp {
     0% {
@@ -267,7 +271,8 @@ footer a:hover {
 
 .op1,
 .op2,
-.op3 {
+.op3,
+.op4 {
     opacity: 0;
 }
 
@@ -309,7 +314,7 @@ footer a:hover {
     padding: 30px 0 60px 0;
     color: #fff;
     /* From https://css.glass */
-    background: rgba(76, 40, 166, 0.7);
+    background: rgba(239, 125, 0, 0.7);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
@@ -387,7 +392,7 @@ footer a:hover {
     height: 100%;
     text-align: center;
     font-size: 40px;
-    line-height: 160px;
+    line-height: 465px;
     height: 160px;
     color: #fff;
 }
