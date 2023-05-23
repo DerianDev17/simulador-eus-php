@@ -110,10 +110,14 @@ $resltado_temas = obetenerTodosLosTemas();
                         <div class="fila">
                             <label for="">Pregunta:</label>
                             <textarea name="pregunta" id="" cols="30" rows="10" required></textarea>
+<<<<<<< HEAD
                         </div>
                         <div class="fila">
                             <label for="">Imagen:</label>
                             <input type="file" name="imagenalex" id="" cols="30" rows="10" >
+=======
+                            <input  type="file" name="image" id="" cols="30" rows="10">
+>>>>>>> da2a042138d33e5effb94fb05b80c9e076f4dc20
                         </div>
                         <div class="opciones">
                             <div class="opcion">
