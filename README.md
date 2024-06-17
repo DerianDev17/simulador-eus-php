@@ -34,7 +34,7 @@ Para usar el simulador:
 *Evaluación Instantánea: Procesa respuestas y muestra resultados en tiempo real.
 *Fácil Configuración: Simplemente clona el repositorio y súbelo a un servidor PHP.
 
-##Contribución
+## Contribución
 Contribuciones son bienvenidas. Para contribuir:
 
 1. Realiza un fork del repositorio.
