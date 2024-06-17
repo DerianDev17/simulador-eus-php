@@ -30,9 +30,9 @@ Para usar el simulador:
 
 ## Características
 
-* Interfaz Intuitiva: Fácil de usar, permite a los usuarios completar cuestionarios rápidamente.
-* Evaluación Instantánea: Procesa respuestas y muestra resultados en tiempo real.
-* Fácil Configuración: Simplemente clona el repositorio y súbelo a un servidor PHP.
+* **Interfaz Intuitiva:** Fácil de usar, permite a los usuarios completar cuestionarios rápidamente.
+* **Evaluación Instantánea:** Procesa respuestas y muestra resultados en tiempo real.
+* **Fácil Configuración:** Simplemente clona el repositorio y súbelo a un servidor PHP.
 
 ## Contribución
 Contribuciones son bienvenidas. Para contribuir:
